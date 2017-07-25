@@ -15,7 +15,7 @@
                             <v-flex xs12 sm6 md6 lg4>
                                 <v-card height="200px"
                                         light
-                                        class = "BBSSection"
+                                        class="BBSSection"
                                         >
                                     <div class="SectionHeadLine"
                                          :class="part.color"
@@ -31,10 +31,20 @@
                                         </v-btn>
                                     </v-layout>
                                     <v-divider></v-divider>
-                                    <v-card-text class="SectionText">
-                                        <ul class="SectionList">
+                                    <v-card-text v-if="part.direction" style="padding-bottom: 0;padding-top: 9px;padding-left: 14px">
+                                        {{part.direction}}
+                                    </v-card-text>
+                                    <v-card-text v-if="part.bestArticle" class="SectionText">
+                                        <ul class="SectionList" style="padding-left: 0">
                                             <li v-for="article in part.bestArticle">
                                                 <router-link :to="'/allPosts/'+article.id">{{article.name}}</router-link>
+                                            </li>
+                                        </ul>
+                                    </v-card-text>
+                                    <v-card-text v-if="part.bestSection" class="SectionText">
+                                        <ul class="SectionList" style="padding-left: 0">
+                                            <li v-for="section in part.bestSection">
+                                                <router-link :to="'/allSections/'+section.id">{{section.name}}</router-link>
                                             </li>
                                         </ul>
                                     </v-card-text>
@@ -68,21 +78,24 @@
                 this.loading = true;
                 this.BBSSections = [{
                     name:"全站十大",
+                    direction:"当前最热门的内容",
                     bestArticle:[{name:"part1", id:1},{name:"part2", id:2}],
                     linker:"/hotposts",
                     color:"grey darken-3"
                 },{
                     name:"帖子广场",
-                    bestArticle:[{name:"part1", id:1},{name:"part2", id:2}],
+                    direction:'汇集了最有用的信息的地方',
                     linker:"/hotposts",
                     color:"orange accent-3"
                 },{
-                    name:"近期公告",
-                    bestArticle:[{name:"part1", id:1},{name:"part2", id:2}],
-                    linker:"/hotposts",
+                    name:"全部板块",
+                    direction:"想要的这里都有～",
+                    bestSection:[{name:"part1", id:1},{name:"part2", id:2}],
+                    linker:"/allSections",
                     color:"light-green darken-3"
                 },{
-                    name:"其他地区",
+                    name:"近期公告",
+                    direction:"打滚求关注",
                     bestArticle:[{name:"part1", id:1},{name:"part2", id:2}],
                     linker:"/hotposts",
                     color:"blue lighten-1"
@@ -98,6 +111,9 @@
 </script>
 
 <style lang="stylus">
+    .BBSSection{
+        margin-bottom :7px;
+    }
     .SectionHeadLine{
         height:4px;
         widht:100%;
@@ -106,7 +122,7 @@
         padding :10px;
     }
     .SectionText{
-        padding:16px 10px 10px 10px;
+        padding:1px 10px 10px 14px;
     }
     .SectionList{
         list-style-type :none;

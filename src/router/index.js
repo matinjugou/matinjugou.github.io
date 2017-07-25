@@ -5,6 +5,10 @@ import HotPosts from '../components/hotposts.vue'
 import SinglePost from '../components/singlepost.vue'
 import MyPosts from '../components/myPosts.vue'
 import AllReplies from '../components/replies.vue'
+import MyCollections from '../components/myCollection.vue'
+import AllSections from '../components/AllSections.vue'
+import Section from '../components/Section.vue'
+import SubSection from '../components/subSection.vue'
 
 Vue.use(Router);
 
@@ -30,5 +34,25 @@ export default new Router({
         {
             path:'/user/:userID/AllReplies',
             component:AllReplies
+        },
+        {
+            path:'/user/:userID/MyCollections',
+            component:MyCollections
+        },
+        {
+            path:'/allSections',
+            component:AllSections,
+        },
+        {
+            path:'/allSections/:Section',
+            component:Section
+        },
+        {
+            path:'/allSections/:Section/:subSection',
+            component:SubSection
+        },
+        {
+            path:'/allSections/:Section/:subSection/:postid',
+            component:SinglePost
         }]
 })
